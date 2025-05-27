@@ -1,0 +1,34 @@
+=====================================================================
+1. Average Price in the Last 12 Months
+=====================================================================
+
+SELECT
+  ROUND(AVG(price), 2) AS avg_price_last_12m
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850
+  AND last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH);
+
+=====================================================================
+2. Average Price in the Last 4 Years
+=====================================================================
+
+SELECT
+  ROUND(AVG(price), 2) AS avg_price_last_4y
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850
+  AND last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 4 YEAR);
+
+=====================================================================
+3. All-Time Average Price
+=====================================================================
+  
+SELECT
+  ROUND(AVG(price), 2) AS avg_price_all_time
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850;

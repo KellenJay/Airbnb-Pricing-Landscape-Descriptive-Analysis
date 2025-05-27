@@ -55,6 +55,32 @@ SELECT
   *
 FROM
   `airbnb.raw_listings`
+
+/*
+===============================================================================
+Airbnb Barcelona – Remove Duplicate Listings
+===============================================================================
+Purpose:
+    - Ensure each listing appears only once in the dataset.
+    - Prevent bias from duplicate rows in downstream aggregation or joins.
+
+SQL Functions Used:
+    - ROW_NUMBER(), PARTITION BY, QUALIFY (BigQuery syntax)
+===============================================================================
+*/
+
+SELECT
+  *
+FROM (
+  SELECT
+    *,
+    ROW_NUMBER() OVER (PARTITION BY id ORDER BY date DESC) AS row_num
+  FROM
+    `airbnb.raw_listings`
+)
+WHERE
+  row_num = 1;
+
 WHERE
   SAFE_CAST(last_review AS DATE) IS NOT NULL
   AND SAFE_CAST(date AS DATE) IS NOT NULL;

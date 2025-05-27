@@ -10,10 +10,11 @@ Using the latest [Inside Airbnb datasets](http://insideairbnb.com/get-the-data.h
 
 The project features:
 - Python-based data processing
-- Tableau dashboards highlighting:
+- A Tableau dashboard highlighting:
   - Average nightly prices
   - Listing availability
-  - Guest engagement metrics
+  - Guest engagement metrics  
+- 📊 **View the Dashboard**: [Barcelona Airbnb Pricing Analysis on Tableau Public](https://public.tableau.com/views/BarcelonaAirbnbPricingAnalysis/Dashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 Final recommendations were tailored to **Javier, Airbnb’s Revenue Optimization Manager**, to guide host pricing strategies that align with market demand and seasonal trends.
 

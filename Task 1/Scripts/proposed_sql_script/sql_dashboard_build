@@ -1,9 +1,30 @@
-=====================================================================
-1. Seasonality: Average nightly price per month/year
+/*
+===============================================================================
+Airbnb Barcelona – Descriptive Pricing & Performance Dashboard (SQL Report)
+===============================================================================
+Purpose:
+    - To analyze nightly price trends across time, room types, and neighborhoods.
+    - To evaluate estimated revenue and price efficiency.
+    - To understand the relationship between review volume and pricing.
 
-Python logic used: groupby ['year', 'month'] and calculate average price.
-=====================================================================
+SQL Functions Used:
+    - EXTRACT(), AVG(), SUM(), COUNT(), ROUND()
+    - GROUP BY, ORDER BY
+===============================================================================
+*/
 
+/*
+===============================================================================
+1. Seasonality: Average Nightly Price per Month & Year
+===============================================================================
+Purpose:
+    - Identify monthly and yearly price fluctuations to detect seasonal trends.
+
+SQL Logic:
+    - Extracts year and month from the 'date' field.
+    - Computes average nightly price after capping extreme values.
+===============================================================================
+*/
 SELECT
   EXTRACT(YEAR FROM date) AS year,
   EXTRACT(MONTH FROM date) AS month,
@@ -11,18 +32,25 @@ SELECT
 FROM
   `airbnb.airbnb_summary_final`
 WHERE
-  price BETWEEN 0 AND 850 
+  price BETWEEN 0 AND 850
 GROUP BY
   year, month
 ORDER BY
   year, month;
 
-=====================================================================
-2. Average Price by Room Type
 
-Python logic used: groupby('room_type')['price'].mean()
-=====================================================================
+/*
+===============================================================================
+2. Room Type Comparison: Average Nightly Price by Room Type
+===============================================================================
+Purpose:
+    - Compare average prices across different types of listings (entire home,
+      private room, shared room, etc.)
 
+SQL Logic:
+    - Groups listings by 'room_type' and computes average price.
+===============================================================================
+*/
 SELECT
   room_type,
   ROUND(AVG(price), 2) AS avg_price
@@ -35,12 +63,18 @@ GROUP BY
 ORDER BY
   avg_price DESC;
 
-=====================================================================
-3. Average Price by Neighborhood Group
 
-Python logic: groupby('neighbourhood_group')['price'].mean()
-=====================================================================
+/*
+===============================================================================
+3. Neighborhood Comparison: Average Price by Neighbourhood Group
+===============================================================================
+Purpose:
+    - Understand how pricing differs across major districts of Barcelona.
 
+SQL Logic:
+    - Aggregates average price per neighbourhood_group.
+===============================================================================
+*/
 SELECT
   neighbourhood_group,
   ROUND(AVG(price), 2) AS avg_price
@@ -53,10 +87,19 @@ GROUP BY
 ORDER BY
   avg_price DESC;
 
-=====================================================================
-4. Estimated Revenue & Price per Room Type
-=====================================================================
 
+/*
+===============================================================================
+4. Estimated Revenue & Price Efficiency by Room Type
+===============================================================================
+Purpose:
+    - Evaluate which room types generate the most revenue and price per night.
+
+SQL Logic:
+    - Filters for listings with revenue and valid availability.
+    - Calculates total and average revenue, and estimated price per night.
+===============================================================================
+*/
 SELECT
   room_type,
   COUNT(*) AS listings,
@@ -73,10 +116,18 @@ GROUP BY
 ORDER BY
   total_revenue DESC;
 
-=====================================================================
-5. Average Price by Number of Reviews
-=====================================================================
 
+/*
+===============================================================================
+5. Review Volume vs. Price: Average Price by Number of Reviews
+===============================================================================
+Purpose:
+    - Explore whether listings with more reviews tend to charge higher prices.
+
+SQL Logic:
+    - Groups listings by 'number_of_reviews' and computes average price.
+===============================================================================
+*/
 SELECT
   number_of_reviews,
   ROUND(AVG(price), 2) AS avg_price
@@ -89,39 +140,33 @@ GROUP BY
 ORDER BY
   number_of_reviews;
 
-=====================================================================
-6. Average Price in the Last 12 Months
-=====================================================================
+/*
+===============================================================================
+Airbnb Barcelona – KPI Summary Report
+===============================================================================
+Purpose:
+    - To present all key business metrics in a single unified table.
+    - This is ideal for use in dashboards, executive summaries, or quick status checks.
 
-SELECT
-  ROUND(AVG(price), 2) AS avg_price_last_12m
-FROM
-  `airbnb.airbnb_summary_final`
-WHERE
-  price BETWEEN 0 AND 850
-  AND last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH);
+SQL Functions Used:
+    - COUNT(), SUM(), AVG(), UNION ALL
+===============================================================================
+*/
 
-=====================================================================
-7. Average Price in the Last 4 Years
-=====================================================================
-
-SELECT
-  ROUND(AVG(price), 2) AS avg_price_last_4y
-FROM
-  `airbnb.airbnb_summary_final`
-WHERE
-  price BETWEEN 0 AND 850
-  AND last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 4 YEAR);
-
-=====================================================================
-8. All-Time Average Price
-=====================================================================
-  
-SELECT
-  ROUND(AVG(price), 2) AS avg_price_all_time
-FROM
-  `airbnb.airbnb_summary_final`
-WHERE
-  price BETWEEN 0 AND 850;
-
-
+SELECT 'Total Listings' AS measure_name, COUNT(*) AS measure_value FROM `airbnb.airbnb_summary_final`
+UNION ALL
+SELECT 'Distinct Room Types', COUNT(DISTINCT room_type) FROM `airbnb.airbnb_summary_final`
+UNION ALL
+SELECT 'Avg Price (All Listings)', ROUND(AVG(price), 2) FROM `airbnb.airbnb_summary_final` WHERE price BETWEEN 0 AND 850
+UNION ALL
+SELECT 'Listings with Revenue Data', COUNT(*) FROM `airbnb.airbnb_summary_final` WHERE estimated_revenue_l365d IS NOT NULL
+UNION ALL
+SELECT 'Total Estimated Revenue', ROUND(SUM(estimated_revenue_l365d), 2) FROM `airbnb.airbnb_summary_final` WHERE estimated_revenue_l365d IS NOT NULL
+UNION ALL
+SELECT 'Listings Reviewed in Last 12M', COUNT(*) FROM `airbnb.airbnb_summary_final` WHERE last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH)
+UNION ALL
+SELECT 'Listings Reviewed in Last 4Y', COUNT(*) FROM `airbnb.airbnb_summary_final` WHERE last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 4 YEAR)
+UNION ALL
+SELECT 'Total Reviews (All Time)', SUM(number_of_reviews) FROM `airbnb.airbnb_summary_final`
+UNION ALL
+SELECT 'Average Guest Rating', ROUND(AVG(review_scores_rating), 1) FROM `airbnb.airbnb_summary_final` WHERE review_scores_rating IS NOT NULL;

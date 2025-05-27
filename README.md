@@ -1,52 +1,4 @@
-# Project Overview – Revenue AI: Cognitive Analyst Challenge
-
-This project is a two-part solution developed for the **Revenue AI – Cognitive Analyst Probation Task**, focused on Airbnb operations in Europe. It blends **data-driven pricing analytics** with **agentic user journey optimization**, addressing both strategic insight and technical execution.
-
----
-
-## Task 1 – Barcelona Pricing Analytics
-
-Using the latest [Inside Airbnb datasets](http://insideairbnb.com/get-the-data.html) for Barcelona, I conducted a comprehensive pricing analysis to identify key trends across **room types**, **neighborhoods**, and **seasonal patterns**.  
-
-The project features:
-- Python-based data processing
-- A Tableau dashboard highlighting:
-  - Average nightly prices
-  - Listing availability
-  - Guest engagement metrics  
-- 📊 **View the Dashboard**: [Barcelona Airbnb Pricing Analysis on Tableau Public](https://public.tableau.com/views/BarcelonaAirbnbPricingAnalysis/Dashboard2?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
-
-Final recommendations were tailored to **Javier, Airbnb’s Revenue Optimization Manager**, to guide host pricing strategies that align with market demand and seasonal trends.
-
----
-
-## Task 2 – Budapest Booking Workflow Optimization
-
-The second phase involved redesigning a booking system for Budapest properties by planning two complementary workflows:
-
-1. **Manual UX Journey** – focused on reducing friction and improving clarity across the user flow.
-2. **AI-Driven Agentic Workflow** – powered by:
-   - `RAI Base` (user interaction + booking automation)
-   - `RAI Price` (real-time pricing optimization)
-   - `Postman Flows` (backend API orchestration)
-   - `OpenAI` (natural language understanding and intent resolution)
-
-By identifying a key pain point at the **payment stage**, I integrated:
-- Simplified payment flows
-- Trust signals
-- Progress indicators
-- Automated reminders
-
-These enhancements reduce drop-offs and **increase booking completion rates**.  
-Both workflows were visualized and compared to support **Javier’s dual strategy**—offering users both flexibility and automation through an intelligent system design.
-
----
-
-
-
-
-
-# 📊 Revenue AI: Cognitive Analyst Challenge – Airbnb Pricing & Booking Intelligence
+# Revenue AI: Cognitive Analyst Challenge – Airbnb Pricing & Booking Intelligence
 
 ## Project Overview
 This project was developed for the **Revenue AI – Cognitive Analyst Probation Task** and consists of two core components focused on Airbnb’s European operations. The work combines exploratory data analysis, data engineering, and UX optimization to surface pricing insights and streamline booking workflows using both manual and AI-enhanced methods.
@@ -57,7 +9,7 @@ This project was developed for the **Revenue AI – Cognitive Analyst Probation 
 
 Using publicly available datasets from [Inside Airbnb](http://insideairbnb.com/get-the-data.html), this task involved a full descriptive analysis of listing performance in **Barcelona**. The primary goal was to uncover patterns in nightly pricing, neighborhood dynamics, and seasonality to inform pricing strategy decisions.
 
-### 📌 Proposed Approach for Analysis
+### Proposed Approach for Analysis
 To ensure a robust and insight-driven process, the following steps were implemented:
 
 1. **Data Preparation & Cleaning**
@@ -82,7 +34,7 @@ To ensure a robust and insight-driven process, the following steps were implemen
    - Guest review trends (total volume, recent engagement)
    - Distribution across price bands and estimated revenue
 
-### 🧮 Tools Used
+### Tools Used
 - Python (Pandas, Seaborn)
 - SQL (BigQuery)
 - Tableau (Dashboarding)
@@ -91,7 +43,7 @@ To ensure a robust and insight-driven process, the following steps were implemen
 ### 📈 View Dashboard
 👉 [Barcelona Airbnb Pricing Analysis – Tableau Public](https://public.tableau.com/views/BarcelonaAirbnbPricingAnalysis/Dashboard2)
 
-### 💡 Final Recommendations
+### Final Recommendations
 Tailored for Javier, Airbnb’s Revenue Optimization Manager:
 - Prioritize premium pricing in high-demand neighborhoods (e.g., Eixample, Sant Martí)
 - Promote full-home listings in spring months to capitalize on seasonality
@@ -104,12 +56,12 @@ Tailored for Javier, Airbnb’s Revenue Optimization Manager:
 
 The second phase involved redesigning the booking system for Airbnb properties in Budapest. Two parallel user journeys were proposed to reduce friction and optimize revenue potential:
 
-### 🛠 Manual UX Journey
+### Manual UX Journey
 - Streamlined UI with clearer booking options
 - Simplified payment flows
 - Use of trust signals and progress indicators
 
-### 🤖 AI-Driven Agentic Workflow
+### AI-Driven Agentic Workflow
 Powered by:
 - **RAI Base** – handles interaction and booking logic
 - **RAI Price** – supports real-time dynamic pricing
@@ -129,5 +81,8 @@ This project demonstrates a complete analytical pipeline, from raw data preparat
 
 ---
 
-## 📂 Repository Structure
+## 👋 Author
+**Ellen Ivanovic**  
+Product Analyst
+
 

@@ -1,0 +1,61 @@
+/*
+===============================================================================
+Remove Nulls from Essential Fields
+===============================================================================
+Purpose:
+    - Eliminate rows with null values in key attributes required for analysis.
+
+SQL Functions Used:
+    - IS NOT NULL
+===============================================================================
+*/
+
+SELECT
+  *
+FROM
+  `airbnb.raw_listings`
+WHERE
+  id IS NOT NULL
+  AND price IS NOT NULL
+  AND room_type IS NOT NULL
+  AND neighbourhood_group IS NOT NULL;
+
+/*
+===============================================================================
+Airbnb Barcelona – Cap Price Outliers
+===============================================================================
+Purpose:
+    - Exclude listings with unreasonably high or low prices that skew analysis.
+
+SQL Functions Used:
+    - BETWEEN
+===============================================================================
+*/
+
+SELECT
+  *
+FROM
+  `airbnb.raw_listings`
+WHERE
+  price BETWEEN 0 AND 850;
+
+/*
+===============================================================================
+Airbnb Barcelona – Filter Listings with Valid Dates
+===============================================================================
+Purpose:
+    - Ensure date-related fields (`date`, `last_review`) can be parsed for time-based analysis.
+
+SQL Functions Used:
+    - SAFE_CAST(), IS NOT NULL
+===============================================================================
+*/
+
+SELECT
+  *
+FROM
+  `airbnb.raw_listings`
+WHERE
+  SAFE_CAST(last_review AS DATE) IS NOT NULL
+  AND SAFE_CAST(date AS DATE) IS NOT NULL;
+

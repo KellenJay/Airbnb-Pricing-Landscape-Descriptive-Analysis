@@ -1,0 +1,127 @@
+=====================================================================
+1. Seasonality: Average nightly price per month/year
+
+Python logic used: groupby ['year', 'month'] and calculate average price.
+=====================================================================
+
+SELECT
+  EXTRACT(YEAR FROM date) AS year,
+  EXTRACT(MONTH FROM date) AS month,
+  ROUND(AVG(price), 2) AS avg_price
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850 
+GROUP BY
+  year, month
+ORDER BY
+  year, month;
+
+=====================================================================
+2. Average Price by Room Type
+
+Python logic used: groupby('room_type')['price'].mean()
+=====================================================================
+
+SELECT
+  room_type,
+  ROUND(AVG(price), 2) AS avg_price
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850
+GROUP BY
+  room_type
+ORDER BY
+  avg_price DESC;
+
+=====================================================================
+3. Average Price by Neighborhood Group
+
+Python logic: groupby('neighbourhood_group')['price'].mean()
+=====================================================================
+
+SELECT
+  neighbourhood_group,
+  ROUND(AVG(price), 2) AS avg_price
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850
+GROUP BY
+  neighbourhood_group
+ORDER BY
+  avg_price DESC;
+
+=====================================================================
+4. Estimated Revenue & Price per Room Type
+=====================================================================
+
+SELECT
+  room_type,
+  COUNT(*) AS listings,
+  ROUND(AVG(estimated_revenue_l365d), 2) AS avg_revenue,
+  ROUND(SUM(estimated_revenue_l365d), 2) AS total_revenue,
+  ROUND(SUM(estimated_revenue_l365d) / SUM(availability_365), 2) AS estimated_price_per_night
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  estimated_revenue_l365d IS NOT NULL
+  AND availability_365 > 0
+GROUP BY
+  room_type
+ORDER BY
+  total_revenue DESC;
+
+=====================================================================
+5. Average Price by Number of Reviews
+=====================================================================
+
+SELECT
+  number_of_reviews,
+  ROUND(AVG(price), 2) AS avg_price
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850
+GROUP BY
+  number_of_reviews
+ORDER BY
+  number_of_reviews;
+
+=====================================================================
+6. Average Price in the Last 12 Months
+=====================================================================
+
+SELECT
+  ROUND(AVG(price), 2) AS avg_price_last_12m
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850
+  AND last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH);
+
+=====================================================================
+7. Average Price in the Last 4 Years
+=====================================================================
+
+SELECT
+  ROUND(AVG(price), 2) AS avg_price_last_4y
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850
+  AND last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 4 YEAR);
+
+=====================================================================
+7. All-Time Average Price
+=====================================================================
+  
+SELECT
+  ROUND(AVG(price), 2) AS avg_price_all_time
+FROM
+  `airbnb.airbnb_summary_final`
+WHERE
+  price BETWEEN 0 AND 850;
+
+

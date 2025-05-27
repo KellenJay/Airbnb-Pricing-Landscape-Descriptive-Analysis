@@ -1,0 +1,33 @@
+/*
+===============================================================================
+Airbnb Barcelona – Final Listing Merge
+===============================================================================
+Purpose:
+    - Enrich listings_viz with review scores, room attributes, estimated revenue,
+      and review activity from auxiliary datasets.
+
+SQL Join Logic:
+    - Base: listings_viz
+    - LEFT JOIN listings → for review_scores_rating, estimated_revenue_l365d, bedrooms, beds, bathrooms
+    - LEFT JOIN reviews_viz → for latest review date activity
+
+SQL Functions Used:
+    - LEFT JOIN, SELECT
+===============================================================================
+*/
+
+SELECT
+  lv.*,
+  l.review_scores_rating,
+  l.estimated_revenue_l365d,
+  l.bedrooms,
+  l.beds,
+  l.bathrooms,
+  rv.date AS review_date
+
+FROM
+  `airbnb.listings_viz` lv
+LEFT JOIN `airbnb.listings` l
+  ON lv.id = l.id
+LEFT JOIN `airbnb.reviews_viz` rv
+  ON lv.id = rv.listing_id;

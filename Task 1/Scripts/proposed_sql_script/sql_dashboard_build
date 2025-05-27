@@ -114,7 +114,7 @@ WHERE
   AND last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 4 YEAR);
 
 =====================================================================
-7. All-Time Average Price
+8. All-Time Average Price
 =====================================================================
   
 SELECT

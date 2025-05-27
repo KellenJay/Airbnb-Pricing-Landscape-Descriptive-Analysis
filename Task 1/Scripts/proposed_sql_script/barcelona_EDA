@@ -1,7 +1,236 @@
-=====================================================================
-1. Average Price in the Last 12 Months
-=====================================================================
+/*
+===============================================================================
+Airbnb Barcelona – Exploratory Data Analysis (EDA)
+===============================================================================
+Purpose:
+    - To explore key attributes, data distribution, and value coverage.
+    - To uncover patterns across room types, reviews, prices, dates, and locations.
 
+SQL Functions Used:
+    - DISTINCT, COUNT, AVG, MIN, MAX, SUM, EXTRACT
+===============================================================================
+*/
+
+
+/*
+===============================================================================
+Dimensions Exploration
+===============================================================================
+Purpose:
+    - Explore key dimensions like room types, neighborhoods, and host structure.
+===============================================================================
+*/
+
+-- Unique room types offered
+SELECT DISTINCT
+    room_type
+FROM `airbnb.airbnb_summary_final`
+ORDER BY room_type;
+
+-- Unique neighbourhood groups
+SELECT DISTINCT
+    neighbourhood_group
+FROM `airbnb.airbnb_summary_final`
+ORDER BY neighbourhood_group;
+
+-- Unique host count
+SELECT COUNT(DISTINCT host_id) AS unique_hosts
+FROM `airbnb.airbnb_summary_final`;
+
+
+/*
+===============================================================================
+Date Range Exploration
+===============================================================================
+Purpose:
+    - Assess the span of data collection and recent activity.
+===============================================================================
+*/
+
+-- Date range based on listing 'date'
+SELECT
+    MIN(date) AS first_listed_date,
+    MAX(date) AS last_listed_date
+FROM `airbnb.airbnb_summary_final`;
+
+-- Date range based on last_review activity
+SELECT
+    MIN(last_review) AS earliest_review,
+    MAX(last_review) AS most_recent_review
+FROM `airbnb.airbnb_summary_final`
+WHERE last_review IS NOT NULL;
+
+
+/*
+===============================================================================
+Magnitude Analysis
+===============================================================================
+Purpose:
+    - Explore the volume and average values across key attributes.
+===============================================================================
+*/
+
+-- Total number of listings
+SELECT COUNT(*) AS total_listings
+FROM `airbnb.airbnb_summary_final`;
+
+-- Listings by room type
+SELECT
+    room_type,
+    COUNT(*) AS total_listings
+FROM `airbnb.airbnb_summary_final`
+GROUP BY room_type
+ORDER BY total_listings DESC;
+
+-- Listings by neighbourhood group
+SELECT
+    neighbourhood_group,
+    COUNT(*) AS total_listings
+FROM `airbnb.airbnb_summary_final`
+GROUP BY neighbourhood_group
+ORDER BY total_listings DESC;
+
+-- Average nightly price by room type (excluding outliers)
+SELECT
+    room_type,
+    ROUND(AVG(price), 2) AS avg_price
+FROM `airbnb.airbnb_summary_final`
+WHERE price BETWEEN 0 AND 850
+GROUP BY room_type
+ORDER BY avg_price DESC;
+
+-- Average review score by room type
+SELECT
+    room_type,
+    ROUND(AVG(review_scores_rating), 1) AS avg_rating
+FROM `airbnb.airbnb_summary_final`
+WHERE review_scores_rating IS NOT NULL
+GROUP BY room_type
+ORDER BY avg_rating DESC;
+
+
+/*
+===============================================================================
+Ranking Analysis
+===============================================================================
+Purpose:
+    - Identify top-performing segments based on pricing and estimated revenue.
+===============================================================================
+*/
+
+-- Top 5 neighbourhood groups by average price
+SELECT
+    neighbourhood_group,
+    ROUND(AVG(price), 2) AS avg_price
+FROM `airbnb.airbnb_summary_final`
+WHERE price BETWEEN 0 AND 850
+GROUP BY neighbourhood_group
+ORDER BY avg_price DESC
+LIMIT 5;
+
+-- Top 5 room types by total estimated revenue
+SELECT
+    room_type,
+    ROUND(SUM(estimated_revenue), 2) AS total_revenue
+FROM `airbnb.airbnb_summary_final`
+WHERE estimated_revenue_l365d IS NOT NULL
+GROUP BY room_type
+ORDER BY total_revenue DESC
+LIMIT 5;
+
+-- Top 5 listings by review count
+SELECT
+    id,
+    name,
+    number_of_reviews
+FROM `airbnb.airbnb_summary_final`
+ORDER BY number_of_reviews DESC
+LIMIT 5;
+
+-- Top 5 listings by review rating
+SELECT
+    id,
+    name,
+    review_scores_rating
+FROM `airbnb.airbnb_summary_final`
+WHERE review_scores_rating IS NOT NULL
+ORDER BY review_scores_rating DESC
+LIMIT 5;
+
+
+/*
+===============================================================================
+Review Activity Exploration
+===============================================================================
+Purpose:
+    - Analyze review volume and recency patterns across the dataset.
+===============================================================================
+*/
+
+-- Total number of reviews (all time)
+SELECT
+    SUM(number_of_reviews) AS total_reviews
+FROM `airbnb.airbnb_summary_final`;
+
+-- Average number of reviews per listing
+SELECT
+    ROUND(AVG(number_of_reviews), 1) AS avg_reviews
+FROM `airbnb.airbnb_summary_final`;
+
+-- Listings reviewed in last 12 months
+SELECT
+    COUNT(*) AS recent_reviews_12m
+FROM `airbnb.airbnb_summary_final`
+WHERE last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH);
+
+
+/*
+===============================================================================
+Price Band Distribution
+===============================================================================
+Purpose:
+    - Categorize listings into price bands to understand pricing tiers.
+===============================================================================
+*/
+
+SELECT
+  CASE
+    WHEN price < 50 THEN '< €50'
+    WHEN price BETWEEN 50 AND 99 THEN '€50–99'
+    WHEN price BETWEEN 100 AND 149 THEN '€100–149'
+    WHEN price BETWEEN 150 AND 199 THEN '€150–199'
+    WHEN price BETWEEN 200 AND 299 THEN '€200–299'
+    ELSE '€300+'
+  END AS price_band,
+  COUNT(*) AS listing_count
+FROM `airbnb.airbnb_summary_final`
+WHERE price BETWEEN 0 AND 850
+GROUP BY price_band
+ORDER BY listing_count DESC;
+
+/*
+===============================================================================
+Time-Based Price Analysis
+===============================================================================
+Purpose:
+    - To evaluate how average nightly prices have changed over time.
+    - To compare recent pricing trends with historical averages.
+
+SQL Functions Used:
+    - AVG(), ROUND()
+    - DATE_SUB(), CURRENT_DATE()
+===============================================================================
+*/
+
+
+/*
+===============================================================================
+1. Average Nightly Price – Last 12 Months
+===============================================================================
+Purpose:
+    - Measures current market pricing by evaluating listings reviewed in the last year.
+===============================================================================
+*/
 SELECT
   ROUND(AVG(price), 2) AS avg_price_last_12m
 FROM
@@ -10,10 +239,15 @@ WHERE
   price BETWEEN 0 AND 850
   AND last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 12 MONTH);
 
-=====================================================================
-2. Average Price in the Last 4 Years
-=====================================================================
 
+/*
+===============================================================================
+2. Average Nightly Price – Last 4 Years
+===============================================================================
+Purpose:
+    - Evaluates pricing trends over a broader window of guest engagement.
+===============================================================================
+*/
 SELECT
   ROUND(AVG(price), 2) AS avg_price_last_4y
 FROM
@@ -22,10 +256,15 @@ WHERE
   price BETWEEN 0 AND 850
   AND last_review >= DATE_SUB(CURRENT_DATE(), INTERVAL 4 YEAR);
 
-=====================================================================
-3. All-Time Average Price
-=====================================================================
-  
+
+/*
+===============================================================================
+3. Average Nightly Price – All Time
+===============================================================================
+Purpose:
+    - Provides the overall pricing benchmark across the full dataset.
+===============================================================================
+*/
 SELECT
   ROUND(AVG(price), 2) AS avg_price_all_time
 FROM

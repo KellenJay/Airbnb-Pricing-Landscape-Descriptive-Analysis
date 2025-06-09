@@ -21,6 +21,41 @@ To improve revenue and user satisfaction across Airbnb’s Barcelona market by:
 
 ---
 
+## Requirements Engineering Framework (Business/ BI Analyst Lens)
+
+### Techniques Used
+
+- **Interviews + Prototyping**: Based on stakeholder persona “Javier”
+- **Document Analysis**: Airbnb documentation & user journey constraints
+- **MoSCoW Prioritization**:
+  - Must-have: Room search, Booking, Cancellation
+  - Should-have: Booking history filter + print
+  - Could-have: Email reminders, trust signals
+  - Won’t-have: Multi-city availability
+
+### Requirements Lifecycle Applied
+
+- **Elicitation**: Simulated stakeholder interviews & brief analysis
+- **Analysis**: Interpreted drop-off trends and workflow gaps
+- **Documentation**: Structured requirements across both workflows
+- **Validation**: Compared outputs against original prompt
+- **Management**: Aligned new AI workflow under existing business rules
+
+## Stakeholder Matrix
+
+| Stakeholder                  | Power  | Interest | Strategy             | Classification |
+| ---------------------------- | ------ | -------- | -------------------- | -------------- |
+| Sponsor (VP of Ops)          | High   | Medium   | Keep Satisfied        | 🔴 Resistant    |
+| Head of Revenue (Europe)     | High   | High     | Manage Closely        | 🟢 Supportive   |
+| Shareholders                 | High   | Low      | Keep Satisfied        | ⚪ Neutral      |
+| Airbnb Hosts                 | Low    | High     | Keep Informed         | 🟢 Supportive   |
+| End Users (Guests)           | Medium | Medium   | Educate via chatbot   | 🟡 Cautious     |
+| Cognitive Analysts           | Medium | High     | Collaborate Closely   | 🟢 Supportive   |
+| UX/UI Designers              | Medium | Medium   | Consult As Needed     | ⚪ Neutral      |
+| System Admin                 | Low    | Low      | Monitor               | 🟢 Supportive   |
+
+---
+
 ## Task 1: Barcelona Pricing Analysis
 
 A data-driven pricing study using **Inside Airbnb datasets** and Tableau visualizations. To ensure a robust and insight-driven process, the following steps were implemented:
@@ -78,36 +113,6 @@ A redesigned booking experience addressing all user stories:
 - **GPT-4**: Conversational agent for booking interaction
 - **LangChain**: Handles business logic and workflow orchestration
 - **Postman Flows**: Executes backend API calls and automates outputs
-
----
-
-## Requirements Engineering Framework (Business/ BI Analyst Lens)
-
-### Techniques Used
-
-- **Interviews + Prototyping**: Based on stakeholder persona “Javier”
-- **Document Analysis**: Airbnb documentation & user journey constraints
-- **MoSCoW Prioritization**:
-  - Must-have: Room search, Booking, Cancellation
-  - Should-have: Booking history filter + print
-  - Could-have: Email reminders, trust signals
-  - Won’t-have: Multi-city availability
-
-### Requirements Lifecycle Applied
-
-- **Elicitation**: Simulated stakeholder interviews & brief analysis
-- **Analysis**: Interpreted drop-off trends and workflow gaps
-- **Documentation**: Structured requirements across both workflows
-- **Validation**: Compared outputs against original prompt
-- **Management**: Aligned new AI workflow under existing business rules
-
-## Stakeholder Matrix
-
-| Stakeholder         | Power | Interest | Strategy               |
-|---------------------|-------|----------|------------------------|
-| Javier (Revenue Mgr)| High  | High     | Key decision-maker     |
-| Airbnb Hosts        | Low   | High     | Informed via insights  |
-| End Users           | Medium| Medium   | Educated via chatbot   |
 
 ---
 

@@ -49,8 +49,6 @@ A data-driven pricing study using **Inside Airbnb datasets** and Tableau visuali
 - Guest review patterns (total volume, recency of reviews)
 - Distribution of listings by price bands and estimated revenue
 
----
-
 ### 🛠️ Tools Used
 - **Python** (Pandas, Seaborn)
 - **SQL** (SQL Server)
@@ -102,8 +100,6 @@ A redesigned booking experience addressing all user stories:
 - **Documentation**: Structured requirements across both workflows
 - **Validation**: Compared outputs against original prompt
 - **Management**: Aligned new AI workflow under existing business rules
-
----
 
 ## Stakeholder Matrix
 

@@ -32,7 +32,7 @@ To improve revenue and user satisfaction across Airbnb’s Barcelona market by:
 | Shareholders                 | High   | Low      | Keep Satisfied        | ⚪ Neutral      |
 | Airbnb Hosts                 | Low    | High     | Keep Informed         | 🟢 Supportive   |
 | End Users (Guests)           | Medium | Medium   | Educate via chatbot   | 🟡 Cautious     |
-| Cognitive Analysts           | Medium | High     | Collaborate Closely   | 🟢 Supportive   |
+| Cognitive/ Data Analysts     | Medium | High     | Collaborate Closely   | 🟢 Supportive   |
 | UX/UI Designers              | Medium | Medium   | Consult As Needed     | ⚪ Neutral      |
 | System Admin                 | Low    | Low      | Monitor               | 🟢 Supportive   |
 

@@ -23,6 +23,19 @@ To improve revenue and user satisfaction across Airbnb’s Barcelona market by:
 
 ## Requirements Engineering Framework (Business/ BI Analyst Lens)
 
+## Stakeholder Matrix
+
+| Stakeholder                  | Power  | Interest | Strategy             | Classification |
+| ---------------------------- | ------ | -------- | -------------------- | -------------- |
+| Sponsor (VP of Ops)          | High   | Medium   | Keep Satisfied        | 🔴 Resistant    |
+| Head of Revenue (Europe)     | High   | High     | Manage Closely        | 🟢 Supportive   |
+| Shareholders                 | High   | Low      | Keep Satisfied        | ⚪ Neutral      |
+| Airbnb Hosts                 | Low    | High     | Keep Informed         | 🟢 Supportive   |
+| End Users (Guests)           | Medium | Medium   | Educate via chatbot   | 🟡 Cautious     |
+| Cognitive Analysts           | Medium | High     | Collaborate Closely   | 🟢 Supportive   |
+| UX/UI Designers              | Medium | Medium   | Consult As Needed     | ⚪ Neutral      |
+| System Admin                 | Low    | Low      | Monitor               | 🟢 Supportive   |
+
 ### Techniques Used
 
 - **Interviews + Prototyping**: Based on stakeholder persona “Javier”
@@ -40,20 +53,7 @@ To improve revenue and user satisfaction across Airbnb’s Barcelona market by:
 - **Documentation**: Structured requirements across both workflows
 - **Validation**: Compared outputs against original prompt
 - **Management**: Aligned new AI workflow under existing business rules
-
-## Stakeholder Matrix
-
-| Stakeholder                  | Power  | Interest | Strategy             | Classification |
-| ---------------------------- | ------ | -------- | -------------------- | -------------- |
-| Sponsor (VP of Ops)          | High   | Medium   | Keep Satisfied        | 🔴 Resistant    |
-| Head of Revenue (Europe)     | High   | High     | Manage Closely        | 🟢 Supportive   |
-| Shareholders                 | High   | Low      | Keep Satisfied        | ⚪ Neutral      |
-| Airbnb Hosts                 | Low    | High     | Keep Informed         | 🟢 Supportive   |
-| End Users (Guests)           | Medium | Medium   | Educate via chatbot   | 🟡 Cautious     |
-| Cognitive Analysts           | Medium | High     | Collaborate Closely   | 🟢 Supportive   |
-| UX/UI Designers              | Medium | Medium   | Consult As Needed     | ⚪ Neutral      |
-| System Admin                 | Low    | Low      | Monitor               | 🟢 Supportive   |
-
+  
 ---
 
 ## Task 1: Barcelona Pricing Analysis

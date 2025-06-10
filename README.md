@@ -1,4 +1,4 @@
-# Airbnb Barcelona Optimization Strategy - Project Overview 
+# Revenue Optimization Analysis - Project Overview 
 
 This repository focused exclusively on optimizing Airbnb operations in **Barcelona** through data analytics and agentic system design. Led by the fictional persona **Javier**, Revenue Optimization Manager at Airbnb Europe, the project combines descriptive pricing insights with manual and AI-enhanced booking workflows to drive higher conversion rates and better inform host strategy.
 

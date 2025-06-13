@@ -122,6 +122,7 @@ A redesigned booking experience addressing all user stories:
 - **Continue investing in agentic tools** like GPT-4 and LangChain to personalize and scale interactions.
 - **Educate users** with onboarding tutorials to build trust in AI interfaces.
 - **Use pricing insights** to help hosts align offerings with seasonal and location-specific demand.
+- **Track user metrics** such as click-through rate, feature adoption, and drop-off rate to evaluate and optimize new booking features.
 
 ---
 
